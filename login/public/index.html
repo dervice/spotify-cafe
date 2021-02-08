@@ -54,8 +54,8 @@
     </script>
     
     <script id="user-playlist-template" type="text/x-handlebars-template">
-      Hello <b>{{href}}</b>
-      <!-- <a href="{{images}} "></a> -->
+      <p>{{items.0.images.0.url}} </p>
+      <img width="150px" height="150px" src="{{items.0.images.0.url}}" />
       
     </script>
 
@@ -103,7 +103,7 @@
         var access_token = params.access_token,
             refresh_token = params.refresh_token,
             error = params.error;
-
+          
         if (error) {
           alert('There was an error during the authentication');
         } else {
@@ -115,18 +115,20 @@
             });
 
           
-           
+
             $.ajax({
                 url: `https://api.spotify.com/v1/me/playlists`,
                 headers: {
                   'Authorization': 'Bearer ' + access_token
                 },
                 success: function(response) {
-                 
                   userPlaylistPlaceholder.innerHTML = userPlaylistTemplate(response);
+                  console.log(response);
+                  console.log(response.items[0].images[0].url);
                   $('#loggedin').hide();
                   $('#user-playlist').show();
                 }
+
             });
           } else {
               // render initial screen
