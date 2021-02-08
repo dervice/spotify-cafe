@@ -29,8 +29,7 @@
         </div>
         <button class="btn btn-default" id="obtain-new-token">Obtain new token using the refresh token</button>
       </div>
-      <div id="user-playlist">
-      </div>
+      <div id="user-playlist"></div>
     </div>
 
     <script id="user-profile-template" type="text/x-handlebars-template">
@@ -56,6 +55,7 @@
     
     <script id="user-playlist-template" type="text/x-handlebars-template">
       Hello <b>{{href}}</b>
+      <!-- <a href="{{images}} "></a> -->
       
     </script>
 
@@ -114,18 +114,7 @@
               refresh_token: refresh_token
             });
 
-            $.ajax({
-                url: 'https://api.spotify.com/v1/me',
-                headers: {
-                  'Authorization': 'Bearer ' + access_token
-                },
-                success: function(response) {
-                  userProfilePlaceholder.innerHTML = userProfileTemplate(response);
-
-                  $('#login').hide();
-                  $('#loggedin').show();
-                }
-            });
+          
            
             $.ajax({
                 url: `https://api.spotify.com/v1/me/playlists`,
